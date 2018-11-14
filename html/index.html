@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Upload image to server using NODE JS</title>
+	<script src="Script/jquery-3.1.1.min.js"></script>
+	<script src="Script/jquery.form.min.js"></script>
+	<script src="Script/index.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script type="text/javascript">
+		window.onload = function(){
+			var modal = document.getElementById('addModal');
+			var btn = document.getElementById('addBtn');
+			var span = document.getElementsByClassName('close')[0];
+
+			btn.onclick = function(){
+				modal.style.display = "block";
+			}
+			span.onclick = function(){
+				modal.style.display = "none";
+			}
+			window.onclick = function(event){
+				if(event.target == modal){
+					modal.style.display = "none";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Add PACS Server</h1>
+	<button id="addBtn">Add Server</button>
+	<div id="addModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<form id="connectServer" action="Connect-Server/" method="post">
+				IP Address:<input type="text" name="ipAddr"><br>
+				Port:<input type="text" name="Port"><br>
+				Title:<input type="text" name="Title"><br>
+				Protocol:
+				<select name="transProtocol">
+					<option value="cGet">C-Get</option>
+					<option value="cMove">C-Move</option>
+				</select><br>
+				<input type="submit" name="submit3" value="Submit" />
+			</form>
+		</div>
+	</div>
+
+	<h1>JPG2DCM</h1>
+	<form id="jpgUploader" enctype="multipart/form-data" action="jpg-upload/" method="post" onsubmit="return checkform1()">
+		<input type="file" id="selectjpg" name="ImgUploader" accept=".jpg, .jpeg" onchange="checkjpg(this);" />
+		<input type="submit" name="submit1" id="btnSubmit1" value="JPG Upload" />
+	</form><br>
+
+	<h1>DCM2JPG</h1>
+	<form id="dcmUploader" enctype="multipart/form-data" action="dcm-download/" method="post" onsubmit="return checkform2()">
+		<input type="file" id="selectdcm" name="DcmUploader" accept=".dcm" onchange="checkdcm(this);" />
+		<input type="submit" name="submit2" id="btnSubmit2" value="DICOM Convert" />
+	</form><br>
+</body>
+</html>
